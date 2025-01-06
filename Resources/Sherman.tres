@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TankData" load_steps=2 format=3 uid="uid://dl1c3u3oysjm0"]
+
+[ext_resource type="Script" path="res://Scripts/TankData.gd" id="1_lx64m"]
+
+[resource]
+script = ExtResource("1_lx64m")
+tank_weight = 25.0
+tank_armor = 100.0
+tank_thrust_force = 10000.0
+tank_rotation_force = 300000.0
+turret_rotation_speed = 0.01
+bullet_damage = 10.0
+bullet_speed = 1000.0

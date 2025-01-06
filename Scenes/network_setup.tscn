@@ -1,0 +1,222 @@
+[gd_scene load_steps=5 format=3 uid="uid://c38fwl31ih2s7"]
+
+[ext_resource type="Script" path="res://Scripts/network_setup.gd" id="1_62sie"]
+[ext_resource type="FontFile" uid="uid://bv6uw640wesij" path="res://Assets/Fonts/Rijusans-Regular.ttf" id="1_em6q2"]
+[ext_resource type="PackedScene" uid="uid://pvwifp0501de" path="res://Scenes/game.tscn" id="3_nsf6o"]
+[ext_resource type="SystemFont" uid="uid://cn2gvueetprq7" path="res://Resources/CoolFont.tres" id="4_r88aj"]
+
+[node name="Network_Setup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_62sie")
+
+[node name="Multiplayer_Config" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Create_Server" type="Button" parent="Multiplayer_Config"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -140.0
+offset_right = 146.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_em6q2")
+theme_override_font_sizes/font_size = 50
+text = "Create Server"
+
+[node name="Join_Server" type="Button" parent="Multiplayer_Config"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -40.0
+offset_right = 119.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_em6q2")
+theme_override_font_sizes/font_size = 50
+text = "Join Server"
+
+[node name="Server_IP_Adress" type="LineEdit" parent="Multiplayer_Config"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 60.0
+offset_right = 150.0
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "localhost"
+placeholder_text = "ip adress"
+
+[node name="Device_IP_Adress" type="Label" parent="Multiplayer_Config"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -57.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_em6q2")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Game" parent="." instance=ExtResource("3_nsf6o")]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn", "res://Scenes/tank.tscn")
+spawn_path = NodePath("../SpawnedScenes")
+
+[node name="SpawnedScenes" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameHud" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Player_Id" type="Label" parent="CanvasLayer/GameHud"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("4_r88aj")
+theme_override_font_sizes/font_size = 30
+text = "Player_id"
+
+[node name="ServerHud" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ServerHud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -283.0
+offset_top = -284.0
+offset_right = 284.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start_Game" type="Button" parent="CanvasLayer/ServerHud/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_r88aj")
+theme_override_font_sizes/font_size = 50
+text = "Start Game"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer"]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(0.0862745, 0.415686, 1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 0.278431, 0.121569, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Players"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Multiplayer_Config/Create_Server" to="." method="_on_create_server_pressed"]
+[connection signal="pressed" from="Multiplayer_Config/Join_Server" to="." method="_on_join_server_pressed"]
+[connection signal="pressed" from="CanvasLayer/ServerHud/PanelContainer/Start_Game" to="." method="_on_start_game_pressed"]
