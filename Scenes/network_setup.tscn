@@ -129,98 +129,31 @@ text = "Player_id"
 
 [node name="ServerHud" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ServerHud"]
+[node name="Start_Btn" type="Button" parent="CanvasLayer/ServerHud"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -283.0
-offset_top = -284.0
-offset_right = 284.0
-offset_bottom = 121.0
+offset_left = -140.0
+offset_top = -38.5
+offset_right = 140.0
+offset_bottom = 38.5
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Start_Game" type="Button" parent="CanvasLayer/ServerHud/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_r88aj")
 theme_override_font_sizes/font_size = 50
 text = "Start Game"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer"]
-custom_minimum_size = Vector2(400, 300)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Label" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer"]
-layout_mode = 2
-text = "Players"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="BlueTeam" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer"]
-modulate = Color(0.0862745, 0.415686, 1, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/BlueTeam"]
-layout_mode = 2
-text = "Blue Team"
-horizontal_alignment = 1
-
-[node name="BlueTeamRoster" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/BlueTeam"]
-layout_mode = 2
-
-[node name="JoinBlueTeam" type="Button" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/BlueTeam"]
-layout_mode = 2
-text = "Join"
-
-[node name="RedTeam" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer"]
-modulate = Color(1, 0.278431, 0.121569, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/RedTeam"]
-layout_mode = 2
-text = "Red Team"
-horizontal_alignment = 1
-
-[node name="RedTeamRoster" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/RedTeam"]
-layout_mode = 2
-
-[node name="JoinRedTeam" type="Button" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/HBoxContainer/RedTeam"]
-layout_mode = 2
-text = "Join"
-
-[node name="Spectators" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/Spectators"]
-layout_mode = 2
-text = "Spectators"
-horizontal_alignment = 1
-
-[node name="RedTeamRoster" type="VBoxContainer" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/Spectators"]
-layout_mode = 2
-
-[node name="JoinRedTeam" type="Button" parent="CanvasLayer/ServerHud/PanelContainer/VBoxContainer/Spectators"]
-layout_mode = 2
-
 [connection signal="pressed" from="Multiplayer_Config/Create_Server" to="." method="_on_create_server_pressed"]
 [connection signal="pressed" from="Multiplayer_Config/Join_Server" to="." method="_on_join_server_pressed"]
-[connection signal="pressed" from="CanvasLayer/ServerHud/PanelContainer/Start_Game" to="." method="_on_start_game_pressed"]

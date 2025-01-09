@@ -37,6 +37,7 @@ shape = SubResource("RectangleShape2D_33l7l")
 
 [node name="Hull_Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+self_modulate = Color(1, 0, 1, 1)
 z_index = 1
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -45,6 +46,7 @@ offset = Vector2(-1, -3)
 
 [node name="Turret_Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+self_modulate = Color(1, 0, 1, 1)
 z_index = 2
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -55,5 +57,4 @@ offset = Vector2(-1, -2)
 position = Vector2(0, -21)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-delta_interval = 0.01
 replication_config = SubResource("SceneReplicationConfig_rfv4c")

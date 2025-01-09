@@ -4,18 +4,18 @@ class_name Player
 
 @onready var camera : Camera2D = %Camera2D
 @export var team = 0
-var player_tank : Tank = null
+
+@export var player_tank : Tank = null
+
+var tank = load("res://Scenes/tank.tscn")
 
 
 
-
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+    handle_input()
+    if !is_multiplayer_authority(): return
     if Input.is_action_just_pressed("Turret | Fire"):
-        if !is_multiplayer_authority(): return
-        
-        print("Player[" + str(get_multiplayer_authority()) + "] Firing")
-    pass
-    #handle_input()
+        print("player: ", self.multiplayer.get_unique_id(), " fired the gun")
 
     
 
@@ -43,13 +43,29 @@ func handle_input():
 
 
 
-# @rpc("any_peer", "call_local", "reliable")
-# func _spawn_tank() -> void:
-#     #print("Spawning tank")
-#     if not is_multiplayer_authority(): return
-#     print("Player ", self.multiplayer.get_unique_id(), " spawned the tank")
-#     var spawnpoint = get_tree().get_nodes_in_group("Spawn_Blue")[0]
-#     #var random_offset = Vector2(randf_range(-500, 500), randf_range(-500, 500)) 
-#     player_tank = Global.instance_node_at_location(tank, get_parent(), spawnpoint.global_position)
-#     player_tank.set_multiplayer_authority(1)
-#     player_tank.name = "Player_Tank_" + str(self.multiplayer.get_unique_id())
+
+@rpc("any_peer", "call_local", "reliable")
+func spawn_local_tank():
+
+    if player_tank: return
+
+    if multiplayer.is_server():
+        print("Server | Player ", self.get_multiplayer_authority(), " spawned a local tank")
+    else:
+        print("Client | Player ", self.get_multiplayer_authority(), " spawned a local tank")
+
+    var random_offset = Vector2(randf_range(-500, 500), randf_range(-500, 500)) 
+    player_tank = Global.instance_node_at_location(tank, get_parent(),  random_offset)
+    player_tank.set_multiplayer_authority(self.get_multiplayer_authority())
+    player_tank.name = "Player_Tank_" + str(self.get_multiplayer_authority())
+    if !multiplayer.is_server():
+        spawn_tank.rpc(player_tank.global_transform, self.get_multiplayer_authority())
+
+@rpc("any_peer", "call_remote", "reliable")
+func spawn_tank(transform : Transform2D, id : int) -> void:
+    if is_multiplayer_authority(): return
+    #print("Player ", id, " spawned the tank")
+
+    player_tank = Global.instance_node_at_location(tank, get_parent(), transform.origin)
+    player_tank.set_multiplayer_authority(id)
+    player_tank.name = "Player_Tank_" + str(id)
