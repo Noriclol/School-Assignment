@@ -20,11 +20,15 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:angular_velocity")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath(".:constant_torque")
+properties/4/path = NodePath("NameHandle/Player_Name:text")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+properties/5/path = NodePath(".:linear_velocity")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [node name="Tank" type="RigidBody2D"]
+collision_mask = 0
 mass = 100.0
 continuous_cd = 2
 linear_damp = 10.0
@@ -54,7 +58,19 @@ texture = ExtResource("3_louca")
 offset = Vector2(-1, -2)
 
 [node name="Bullet_Spawn" type="Node2D" parent="Turret_Sprite"]
+unique_name_in_owner = true
 position = Vector2(0, -21)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_rfv4c")
+
+[node name="NameHandle" type="Node2D" parent="."]
+
+[node name="Player_Name" type="Label" parent="NameHandle"]
+unique_name_in_owner = true
+offset_left = -25.0
+offset_top = -125.0
+offset_right = 27.0
+offset_bottom = -102.0
+text = "Skibidi"
+horizontal_alignment = 1

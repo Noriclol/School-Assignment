@@ -1,7 +1,7 @@
 extends Control
 
 var player = load("res://Scenes/Player.tscn")
-
+var tank = load("res://Scenes/tank.tscn")
 
 @onready var multiplayer_config_ui = %Multiplayer_Config
 @onready var server_ip_adress = %Server_IP_Adress
@@ -19,7 +19,6 @@ var player = load("res://Scenes/Player.tscn")
 @onready var spawned_scenes = %SpawnedScenes
 
 var players : Array[Player] = []
-
 
 
 func _ready() -> void:
@@ -40,7 +39,6 @@ func _on_create_server_pressed() -> void:
 	player_id.text = "Player_" + str(multiplayer.get_unique_id())
 
 
-
 func _on_join_server_pressed() -> void:
 	if server_ip_adress.text != "":
 		multiplayer_config_ui.hide()
@@ -58,9 +56,11 @@ func on_start_btn_pressed() -> void:
 	# for id in multiplayer.get_peers():
 	# 	_player.spawn_local_tank.rpc_id(id)
 
+	if !multiplayer.is_server(): return
 
 	for _player in players:
-		_player.spawn_local_tank.rpc_id(_player.get_multiplayer_authority())
+		_instance_tank(_player.get_multiplayer_authority())
+		#_player.spawn_local_tank.rpc_id(_player.get_multiplayer_authority())
 
 
 func _player_connected(id) -> void:
@@ -96,3 +96,14 @@ func _instance_player(id: int) -> Player:
 	return player_instance
 
 
+func _instance_tank(id: int) -> void:
+	if multiplayer.is_server():
+		print("Server | Spawned a tank for player ", id, " spawned")
+	else:
+		print("Client | Spawned a tank for player ", id, " spawned")
+	var random_offset = Vector2(randf_range(-500, 500), randf_range(-500, 500)) 
+	var new_tank = Global.instance_node_at_location(tank, spawned_scenes,  random_offset)
+	#new_tank.tank_fired.connect(on_tank_fired)
+	#player_tank.set_multiplayer_authority(self.get_multiplayer_authority())
+	new_tank.name = "Player_Tank_" + str(id)
+	new_tank.player_name.text = new_tank.name

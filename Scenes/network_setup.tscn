@@ -94,7 +94,7 @@ vertical_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 unique_name_in_owner = true
-_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn", "res://Scenes/tank.tscn")
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn", "res://Scenes/tank.tscn", "res://Scenes/bullet.tscn")
 spawn_path = NodePath("../SpawnedScenes")
 
 [node name="SpawnedScenes" type="Node2D" parent="."]
