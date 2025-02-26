@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c38fwl31ih2s7"]
 
-[ext_resource type="Script" path="res://Scripts/network_setup.gd" id="1_62sie"]
+[ext_resource type="Script" uid="uid://b8bfqncdlw7vl" path="res://Scripts/network_setup.gd" id="1_62sie"]
 [ext_resource type="FontFile" uid="uid://bv6uw640wesij" path="res://Assets/Fonts/Rijusans-Regular.ttf" id="1_em6q2"]
 [ext_resource type="PackedScene" uid="uid://pvwifp0501de" path="res://Scenes/game.tscn" id="3_nsf6o"]
 [ext_resource type="SystemFont" uid="uid://cn2gvueetprq7" path="res://Resources/CoolFont.tres" id="4_r88aj"]
@@ -94,7 +94,7 @@ vertical_alignment = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 unique_name_in_owner = true
-_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn", "res://Scenes/tank.tscn", "res://Scenes/bullet.tscn")
+_spawnable_scenes = PackedStringArray("uid://ccgd1t8vwcsth", "uid://dfxbs0fghlknn", "uid://cxqp1f5wskx4x")
 spawn_path = NodePath("../SpawnedScenes")
 
 [node name="SpawnedScenes" type="Node2D" parent="."]

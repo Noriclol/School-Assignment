@@ -58,4 +58,3 @@ func fire_gun():
 	# bullet.global_rotation = bullet_spawn.global_rotation
 	# bullet.linear_velocity = Vector2.UP.rotated(bullet.global_rotation) * tank_data.bullet_speed
 	# turret_fire_anim.play("Fire")
-

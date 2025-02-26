@@ -1,0 +1,2 @@
+extends MultiplayerSynchronizer
+class_name PlayerInput
